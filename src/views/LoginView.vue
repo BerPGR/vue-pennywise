@@ -8,7 +8,7 @@
       <h1 :style="{color: '#001F3F'}">Faça login para continuar</h1>
       <input type="email" placeholder="E-mail" v-model="email">
       <input type="password" placeholder="Senha" v-model="senha">
-      <button>LOGIN</button>
+      <button @click="handleLogin">LOGIN</button>
       <h2>OU CADASTRE-SE</h2>
       <button @click="selectedLogin = !selectedLogin">CADASTRE-SE</button>
       <p :style="{fontSize: '12px'}">Made with ❤️ by Bernardo Matuchewski</p>
@@ -51,6 +51,14 @@ export default {
       this.email = ''
       this.senha = ''
       this.teledone = ''
+    },
+    handleLogin() {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.senha)
+      .then((userCredentials) => {
+        const user = userCredentials.user
+        alert('Usuario registrado')
+        this.$router.push('/')
+      })
     }
   }
 }
@@ -59,7 +67,7 @@ export default {
 <style scoped>
 button {
   margin: 20px 0;
-  width: 30%;
+  width: 50%;
   padding: 10px;
   border-radius: 20px;
   border: none;
