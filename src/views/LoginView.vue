@@ -18,14 +18,17 @@
       <input type="email" placeholder="E-mail" v-model="email">
       <input type="password" placeholder="Senha" v-model="senha">
       <input type="tel" placeholder="Telefone" v-model="telefone">
-      <button>CADASTRAR</button>
+      <button @click="handleRegister">CADASTRAR</button>
       <h2 :style="{color: '#001F3F'}">OU LOGUE SUA CONTA</h2>
       <button @click="selectedLogin = !selectedLogin">LOGAR</button>
+      <p :style="{fontSize: '12px'}">Made with ❤️ by Bernardo Matuchewski</p>
     </div>
   </div>
 </template>
 
 <script>
+import firebase from '../../firebaseConfig'
+
 export default {
   name:'LoginScreen',
   data: () => ({
@@ -33,7 +36,23 @@ export default {
     email: '',
     senha: '',
     telefone: '',
-  })
+    user: {}
+  }),
+  methods: {
+    handleRegister() {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.senha)
+      .then((userCredentials) => {
+        const user = userCredentials.user
+        console.log(user);
+        alert('Usuario registrado')
+      })
+      .catch(error => alert(error.message))
+
+      this.email = ''
+      this.senha = ''
+      this.teledone = ''
+    }
+  }
 }
 </script>
 
