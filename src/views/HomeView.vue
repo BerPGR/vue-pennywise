@@ -1,5 +1,9 @@
 <template>
-  <div class="home">
+  <div class="home-container">
+    <div class="money-info">
+      <h1>Olá, usuário. Seu dinheiro é</h1>
+      
+    </div>
   </div>
 </template>
 
@@ -10,3 +14,10 @@ export default {
   name: 'HomeView',
 }
 </script>
+
+<style scoped>
+.home-container {
+  min-height: 100vh;
+  background-image: url("../assets/homeBackground.svg");
+}
+</style>
