@@ -5,23 +5,23 @@
       <h3 class="welcome-slogan">O jeito inteligente de <br/>controlar o seu dinheiro</h3>
     </div>
     <div v-if="selectedLogin == true" class="login-wrapper">
-      <h1 :style="{color: '#001F3F'}">Faça login para continuar</h1>
+      <h1 :style="{color: '#00B894'}">Faça login para continuar</h1>
       <input type="email" placeholder="E-mail" v-model="email">
       <input type="password" placeholder="Senha" v-model="senha">
       <button @click="handleLogin">LOGIN</button>
-      <h2>OU CADASTRE-SE</h2>
+      <h2 :style="{color: '#00B894'}">OU CADASTRE-SE</h2>
       <button @click="selectedLogin = !selectedLogin">CADASTRE-SE</button>
-      <p :style="{fontSize: '12px'}">Made with ❤️ by Bernardo Matuchewski</p>
+      <p :style="{fontSize: '12px', color: '#fff'}">Made with ❤️ by Bernardo Matuchewski</p>
     </div>
     <div v-else class="login-wrapper">
-      <h1 :style="{color: '#001F3F'}">Cadastre sua conta</h1>
+      <h1 :style="{color: '#00B894'}">Cadastre sua conta</h1>
       <input type="email" placeholder="E-mail" v-model="email">
       <input type="password" placeholder="Senha" v-model="senha">
       <input type="tel" placeholder="Telefone" v-model="telefone">
       <button @click="handleRegister">CADASTRAR</button>
-      <h2 :style="{color: '#001F3F'}">OU LOGUE SUA CONTA</h2>
+      <h2 :style="{color: '#00B894'}">OU LOGUE SUA CONTA</h2>
       <button @click="selectedLogin = !selectedLogin">LOGAR</button>
-      <p :style="{fontSize: '12px'}">Made with ❤️ by Bernardo Matuchewski</p>
+      <p :style="{fontSize: '12px', color: '#fff'}">Made with ❤️ by Bernardo Matuchewski</p>
     </div>
   </div>
 </template>
@@ -43,20 +43,19 @@ export default {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.senha)
       .then((userCredentials) => {
         const user = userCredentials.user
-        console.log(user);
-        alert('Usuario registrado')
+        alert(user)
       })
       .catch(error => alert(error.message))
 
       this.email = ''
       this.senha = ''
-      this.teledone = ''
+      this.telefone = ''
+
+      this.selectedLogin = !this.selectedLogin
     },
     handleLogin() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.senha)
-      .then((userCredentials) => {
-        const user = userCredentials.user
-        alert('Usuario registrado')
+      .then(() => {
         this.$router.push('/')
       })
     }
@@ -71,8 +70,8 @@ button {
   padding: 10px;
   border-radius: 20px;
   border: none;
-  background-color: #001F3F;
-  color: #D3D3D3;
+  background-color: #00B894;
+  color: #001F3F;
   font-weight: bold;
   cursor: pointer;
 }
@@ -80,7 +79,8 @@ button {
 input {
   background-color: transparent;
   border-radius: 20px;
-  border: 1px solid #001F3F;
+  border: 1px solid #00B894;
+  color: #00B894;
   padding: 12px;
   width: 70%;
   margin-top: 20px;
@@ -88,7 +88,7 @@ input {
 }
 
 ::placeholder {
-    color: #001F3F;
+    color: #fff;
 }
 .login-container {
   min-height: 100vh;
@@ -123,9 +123,9 @@ input {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #FFD700;
+  background-color: #001F3F;
   border-radius: 20px;
-  opacity: 0.8;
-  box-shadow: 4px 8px 10px #D3D3D3;
+  opacity: 0.9;
+  box-shadow: 4px 8px 10px #001F3F;
 }
 </style>
